@@ -1,0 +1,46 @@
+﻿@using System.Security.Claims;
+@using ASP.NETcoreSurveyApp.Models;
+@model SurveyViewModel;
+@{
+    ViewData["Title"] = "Ankieta";
+}
+
+<div>
+    <form asp-route-id="@Model.Survey.Id" asp-controller="Response" asp-action="Create" method="post">
+        <div class="d-flex justify-content-between">
+            <div class="mb-3">
+                <h2 name="surveyTitle" type="text">@Model.Survey.Title</h2>
+                <p>@Model.Survey.Description</p>
+            </div>
+            @if (Model.Survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+                <div>
+                    <a class="text-decoration-none btn btn-primary" asp-route-id="@Model.Survey.Id" asp-controller="Survey" asp-action="ShowResults">Wyświetl wyniki</a>
+                </div>
+            }
+        </div>
+
+        <ul class="list-group list-group-flush">
+            @for (int i = 0; i < Model.Questions.Count(); i++)
+            {
+                <li class="list-group-item">
+                    <h4>@(i+1). @Model.Questions[i].Text</h4>
+                    <div class="form-check">
+                        @for (int j = 0; j < Model.Questions[i].Answers.Count(); j++)
+                        {
+                            if (Model.Questions[i].Type == "Radio"){
+                                <input name="selected" class="form-check-input" type="radio" value="@Model.Questions[i].Answers[j].Id"/>  
+                                <label class="form-check-label">@Model.Questions[i].Answers[j].Text</label><br>
+                            }
+                            else if (Model.Questions[i].Type == "Checkbox"){
+                                <input name="selected" class="form-check-input" type="checkbox" value="@Model.Questions[i].Answers[j].Id">
+                                <label class="form-check-label">@Model.Questions[i].Answers[j].Text</label><br>
+                            }
+                        }
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <button class="btn btn-primary mt-4" type="submit">Zapisz podejście</button>
+    </form>
+</div>

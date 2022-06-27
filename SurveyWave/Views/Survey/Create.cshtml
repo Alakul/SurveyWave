@@ -1,0 +1,61 @@
+﻿@using System.Security.Claims;
+@using ASP.NETcoreSurveyApp.Models;
+@model SurveyViewModel;
+@{
+    ViewData["Title"] = "Dodaj ankietę";
+}
+
+<div>
+    <partial name="Templates/_Alert" model="@TempData["Alert"]?.ToString()"/>
+    <form asp-controller="Survey" asp-action="Create" method="post">
+        <div class="mb-3">
+            <h3>Dodawanie ankiety</h3>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Survey.Title"></label>
+            <input asp-for="Survey.Title" type="text" class="form-control">
+            <span asp-validation-for="Survey.Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Survey.Description"></label>
+            <textarea asp-for="Survey.Description" type="text" class="form-control"></textarea>
+            <span asp-validation-for="Survey.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Survey.Status"></label>
+            <select asp-for="Survey.Status" class="form-control">
+                <option selected value="1">Otwarta</option>
+                <option value="2">Zamknięta</option>
+            </select>
+            <span asp-validation-for="Survey.Status" class="text-danger"></span>
+        </div>
+        <div class="d-flex mb-3">
+            <div class="col-6 p-0 pr-3">
+                <label asp-for="Survey.StartDate"></label>
+                <input asp-for="Survey.StartDate" type="datetime" class="form-control">
+                <span asp-validation-for="Survey.StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-6 p-0 pl-3">
+                <label asp-for="Survey.EndDate"></label>
+                <input asp-for="Survey.EndDate" type="datetime" class="form-control">
+                <span asp-validation-for="Survey.EndDate" class="text-danger"></span>
+            </div>          
+        </div>
+
+        <div class="mb-3">
+            <label>Pytania</label>
+            <div id="questionRows" class="list-group">
+                @foreach (var question in Model.Questions){
+                    <partial name="Templates/_Question" model="new Question()" />
+                }
+            </div>
+            <a id="addQuestion" class="btn btn-light text-center" asp-action="AddQuestion" asp-controller="Survey"><i class="bi bi-plus-lg"></i> Dodaj pytanie</a>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Opublikuj</button>
+    </form>
+</div>
+
+@section scripts {
+    <script src="~/js/createForm.js"></script>
+}

@@ -1,0 +1,57 @@
+﻿@using System.Security.Claims;
+@model List<Survey>
+@{
+    ViewData["Title"] = "Ankiety";
+}
+
+<div class="row align-items-start">
+    <div class="col-3">
+        <div class="form-group">
+            <label>Sortowanie</label>
+            <select class="form-control">
+                <option selected value="1">Po nazwie rosnąco</option>
+                <option value="2">Po nazwie malejąco</option>
+            </select>
+        </div>   
+        <div class="form-group">
+            <label>Wyszukiwanie</label>
+            <form class="d-flex">
+                <input class="form-control mr-sm-2" type="search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Szukaj</button>
+            </form>
+        </div>
+        <div class="form-group">
+            <label>Status</label>
+            <select class="form-control">
+                <option selected value="1">Otwarte</option>
+                <option value="2">Zamknięte</option>
+            </select>
+        </div> 
+    </div>
+    <div class="col-9">
+        <div class="mb-3">
+            <h5>Lista ankiet</h5>
+        </div>
+        <div class="list-group list-group-flush bg-white">
+            @foreach (var survey in Model)
+            {
+                <div class="list-group-item d-flex w-100 align-items-center justify-content-between">
+                    <div class="col-9">
+                        <a class="text-decoration-none text-dark" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Details"><strong class="mb-1">@survey.Title</strong></a><br>
+                        <small class="small">Data zamknięcia</small>
+                    </div>
+                    <div>
+                        @if (survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+                            <a class="text-decoration-none text-dark btn btn-light" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Edit"><i class="answerIcon bi">Edytuj</i></a>
+                            <a class="text-decoration-none text-dark btn btn-light" data-toggle="modal" data-target="#deleteModal_@survey.Id"><i class="bi bi-trash3-fill">Usuń</i></a>
+                            <form asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Delete" method="post">
+                                <partial name="Templates/_ModalDelete" model="@survey.Id"/>
+                            </form>
+                        }
+                    </div>
+                </div>     
+            }
+        </div>
+    </div>
+</div>
+

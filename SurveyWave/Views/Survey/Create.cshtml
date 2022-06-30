@@ -7,55 +7,57 @@
 
 <div>
     <partial name="Templates/_Alert" model="@TempData["Alert"]?.ToString()"/>
-    <form asp-controller="Survey" asp-action="Create" method="post">
+    <form id="create" asp-controller="Survey" asp-action="Create" method="post">
         <div class="mb-3">
             <h3>Dodawanie ankiety</h3>
         </div>
         <div class="mb-3">
-            <label asp-for="Survey.Title"></label>
+            <label asp-for="Survey.Title">Tytuł <span style="color: red;">*</span></label>
             <input asp-for="Survey.Title" type="text" class="form-control">
             <span asp-validation-for="Survey.Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="Survey.Description"></label>
+            <label asp-for="Survey.Description">Opis <span style="color: red;">*</span></label>
             <textarea asp-for="Survey.Description" type="text" class="form-control"></textarea>
             <span asp-validation-for="Survey.Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="Survey.Status"></label>
+            <label asp-for="Survey.Status">Status <span style="color: red;">*</span></label>
             <select asp-for="Survey.Status" class="form-control">
                 <option selected value="1">Otwarta</option>
                 <option value="2">Zamknięta</option>
             </select>
             <span asp-validation-for="Survey.Status" class="text-danger"></span>
         </div>
-        <div class="d-flex mb-3">
-            <div class="col-6 p-0 pr-3">
-                <label asp-for="Survey.StartDate"></label>
-                <input asp-for="Survey.StartDate" type="datetime" class="form-control">
+        <div class="form-row mb-3">
+            <div class="col">
+              <label asp-for="Survey.StartDate">Data otwarcia <span style="color: red;">*</span></label>
+                <input id="startDate" asp-for="Survey.StartDate" type="date" class="form-control">
                 <span asp-validation-for="Survey.StartDate" class="text-danger"></span>
             </div>
-            <div class="col-6 p-0 pl-3">
-                <label asp-for="Survey.EndDate"></label>
-                <input asp-for="Survey.EndDate" type="datetime" class="form-control">
+            <div class="col">
+              <label asp-for="Survey.EndDate">Data zamknięcia <span style="color: red;">*</span></label>
+                <input id="endDate" asp-for="Survey.EndDate" type="date" class="form-control">
                 <span asp-validation-for="Survey.EndDate" class="text-danger"></span>
-            </div>          
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label>Pytania</label>
+        <div class="mb-5">
+            <label>Pytania <span style="color: red;">*</span></label>
             <div id="questionRows" class="list-group">
                 @foreach (var question in Model.Questions){
                     <partial name="Templates/_Question" model="new Question()" />
                 }
             </div>
-            <a id="addQuestion" class="btn btn-light text-center" asp-action="AddQuestion" asp-controller="Survey"><i class="bi bi-plus-lg"></i> Dodaj pytanie</a>
+            <a id="addQuestion" class="btn btn-light btn-sm text-center mt-2" asp-action="AddQuestion" asp-controller="Survey"><i class="bi bi-plus-lg"></i> Dodaj pytanie</a>
         </div>
 
-        <button class="btn btn-primary" type="submit">Opublikuj</button>
+        <button id="submit" class="btn btn-primary" type="submit">Opublikuj</button>
     </form>
 </div>
 
 @section scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/js/validation.js"></script>
     <script src="~/js/createForm.js"></script>
 }

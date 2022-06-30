@@ -1,12 +1,14 @@
 ﻿@model Answer
-<div id="answer_@(Model.Index)" class="answerRow mb-1 d-flex justify-content-between mt-3">
+<div id="answer_@(Model.Index)" class="answerRow mb-1 d-flex justify-content-between mt-2">
     <div class="d-flex">
         <input class="mr-3 inputGroup" type="@(Model.QuestionType.ToLower())" value="@(Model.QuestionType)">
-        <input class="answers form-control border-0" type="text" placeholder="Opcja @(Model.Index+1)" data-val="true" data-val-length="Pole Odpowiedź musi mieć co najmniej 2 i maksymalnie 100 znaków." data-val-length-max="100" data-val-length-min="2" data-val-required="Pole Odpowiedź jest wymagane." maxlength="100" name="Questions[@(Model.QuestionIndex)].Answers[@(Model.Index)].Text">
-        <span class="answerSpan text-danger field-validation-valid" data-valmsg-for="Questions[@(Model.QuestionIndex)].Answers[@(Model.Index)].Text" data-valmsg-replace="true"></span>
+        <div>
+            <input class="answers form-control form-control-sm border-0" type="text" placeholder="Opcja @(Model.Index+1)" name="Questions[@(Model.QuestionIndex)].Answers[@(Model.Index)].Text">
+            <span class="answerSpan text-danger field-validation-valid" data-valmsg-for="Questions[@(Model.QuestionIndex)].Answers[@(Model.Index)].Text"></span>
+        </div>     
     </div>
     <div class="answerButtons form-check">
-        <button type="button" class="answerUp btn btn-light"><i class="answerIcon bi bi-arrow-up"></i></button>
-        <a href="#" class="deleteAnswer btn btn-light"><i class="answerIcon bi bi-trash"></i></a>
+        <button type="button" class="answerUp btn btn-light btn-action"><i class="answerIcon bi bi-arrow-up"></i></button>
+        <a href="#" class="deleteAnswer btn btn-light btn-action"><i class="answerIcon bi bi-trash"></i></a>
     </div>
 </div>

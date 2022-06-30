@@ -12,6 +12,22 @@ $(document).on('click', '#addQuestion', function () {
             changeFirstElementQuestion();
             changeFirstElementAnswer();
             changeIdQuestion();
+
+            var last = $(".questionRow").length - 1;
+            $('[name="Questions['+ last +'].Text').rules(
+                    'add', {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 200
+                }
+            );
+            $('[name="Questions['+ last +'].Answers[0].Text').rules(
+                    'add', {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 200
+                }
+            );
         }
     });
     return false;
@@ -34,7 +50,20 @@ $(document).on('click', '.addAnswer', function () {
     $.ajax({
         url: this.href + "?questionIndex=" + qi + "&index=" + i + "&type=" + type.val(),
         cache: false,
-        success: function (html) { element.append(html); changeFirstElementAnswer(); }
+        success: function (html) {
+            element.append(html);
+            changeFirstElementAnswer();
+
+            var last = $("#question_"+qi).find('.answerRows').children('.answerRow').length - 1;
+            $('[name="Questions[' + qi + '].Answers[' + last + '].Text').rules(
+                    'add', {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 200
+                }
+            );
+            console.log(last);
+        }
     });
     return false;
 });

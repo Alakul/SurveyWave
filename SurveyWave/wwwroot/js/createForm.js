@@ -62,7 +62,6 @@ $(document).on('click', '.addAnswer', function () {
                     maxlength: 200
                 }
             );
-            console.log(last);
         }
     });
     return false;

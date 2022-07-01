@@ -35,6 +35,7 @@ namespace ASP.NETcoreSurveyApp.Models
 
         [Display(Name = "Status")]
         public string Status { get; set; }
+        public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Data otwarcia")]

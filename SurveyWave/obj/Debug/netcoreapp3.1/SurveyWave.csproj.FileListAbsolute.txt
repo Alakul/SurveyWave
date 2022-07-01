@@ -694,3 +694,6 @@ C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\n
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\SurveyWave.dll
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\SurveyWave.pdb
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\SurveyWave.genruntimeconfig.cache
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_SearchBar.cshtml.g.cs
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_SortBar.cshtml.g.cs
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_StatusBar.cshtml.g.cs

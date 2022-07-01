@@ -1,0 +1,13 @@
+﻿<form id="statusForm" action="@Url.Action("Index")">
+    <label>Status</label>
+    <select id="selectStatus" name="SelectStatus" class="form-control">
+        @foreach (var item in @ViewBag.Status){
+            if (ViewData["SelectedStatus"].ToString()!=null && ViewData["SelectedStatus"].ToString() == item.Key){
+                <option value="@item.Key" selected>@item.Value</option>
+            }
+            else {
+                <option value="@item.Key">@item.Value</option>
+            }
+        }
+    </select>
+</form>

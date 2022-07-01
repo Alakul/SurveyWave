@@ -1,7 +1,9 @@
 ﻿using ASP.NETcoreSurveyApp.Data;
 using ASP.NETcoreSurveyApp.Models;
+using Biblioteczka.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SurveyWave.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,23 @@ namespace ASP.NETcoreSurveyApp.Controllers
             db = context;
         }
 
-
         // GET: SurveController
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string sortOrder, string formValue, string selectStatus)
         {
             List<Survey> surveys = db.Survey.ToList();
+            HttpContextAccessor httpContextAccessor = new HttpContextAccessor();
+            var tuple = AppMethods.Search(httpContextAccessor, surveys, "SearchStringSurvey", formValue, searchString);
+            surveys = tuple.Item1;
+            ViewBag.SearchString = tuple.Item2;
+
+            surveys = AppMethods.Sort(httpContextAccessor, surveys, "SortOrderSurvey", sortOrder);
+            ViewData["Selected"] = AppMethods.SetViewData(httpContextAccessor, sortOrder, "SortOrderSurvey", "DateDesc");
+            ViewBag.Values = AppData.surveySort;
+
+            surveys = AppMethods.SelectStatus(httpContextAccessor, surveys, "StatusSurvey", selectStatus);
+            ViewData["SelectedStatus"] = AppMethods.SetViewData(httpContextAccessor, selectStatus, "StatusSurvey", "A");
+            ViewBag.Status = AppData.status;
+
             return View(surveys);
         }
 
@@ -57,9 +71,10 @@ namespace ASP.NETcoreSurveyApp.Controllers
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
                     Title = model.Survey.Title,
                     Description = model.Survey.Description,
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.Now,
-                    Status = "O",
+                    Date = DateTime.Now,
+                    StartDate = model.Survey.StartDate,
+                    EndDate = model.Survey.EndDate,
+                    Status = model.Survey.Status,
                 };
 
                 db.Survey.Add(survey);
@@ -181,6 +196,24 @@ namespace ASP.NETcoreSurveyApp.Controllers
             responseViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
             responseViewModel.Answers = db.Answer.ToList();
             return View(responseViewModel);
+        }
+
+        public IActionResult SelectStatus(string selectStatus)
+        {
+            List<Survey> surveys = db.Survey.ToList();
+            if (selectStatus == "C" || selectStatus == "O"){
+                surveys = db.Survey.Where(x => x.Status == selectStatus).ToList();
+            }
+            ViewData["SelectedStatus"] = selectStatus;
+
+            Dictionary<string, string> status = new Dictionary<string, string> {
+                {"A", "Wszystkie"},
+                {"O", "Otwarte"},
+                {"C", "Zamknięte"}
+            };
+            ViewBag.Status = status;
+
+            return View(nameof(Index), surveys);
         }
     }
 }

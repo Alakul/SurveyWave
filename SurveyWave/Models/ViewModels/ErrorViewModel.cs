@@ -1,6 +1,6 @@
 using System;
 
-namespace ASP.NETcoreSurveyApp.Models
+namespace SurveyWave.Models
 {
     public class ErrorViewModel
     {

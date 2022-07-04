@@ -21,35 +21,35 @@ using Microsoft.AspNetCore.Identity;
 #nullable disable
 #nullable restore
 #line 2 "C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\Areas\Identity\Pages\_ViewImports.cshtml"
-using ASP.NETcoreSurveyApp.Areas.Identity;
+using SurveyWave.Areas.Identity;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 3 "C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\Areas\Identity\Pages\_ViewImports.cshtml"
-using ASP.NETcoreSurveyApp.Areas.Identity.Pages;
+using SurveyWave.Areas.Identity.Pages;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\Areas\Identity\Pages\_ViewImports.cshtml"
-using ASP.NETcoreSurveyApp.Areas.Identity.Data;
+using SurveyWave.Areas.Identity.Data;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 1 "C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\Areas\Identity\Pages\Account\_ViewImports.cshtml"
-using ASP.NETcoreSurveyApp.Areas.Identity.Pages.Account;
+using SurveyWave.Areas.Identity.Pages.Account;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9048cc10306d72db4c68b675781ae3f0fc5b654d", @"/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7fe63ff7a38688987dbcab08252b842100b3b41e", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"da6beeba34e142e84e0d055691458e2dd87ecce2", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1fe6333a99ffa8b256466d7db650692aa9b83a3d", @"/Areas/Identity/Pages/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"b75772eb73a33aacf0b285cb813f955dd1c5d385", @"/Areas/Identity/Pages/Account/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Identity_Pages_Account_ForgotPasswordConfirmation : global::Microsoft.AspNetCore.Mvc.RazorPages.Page
     #nullable disable

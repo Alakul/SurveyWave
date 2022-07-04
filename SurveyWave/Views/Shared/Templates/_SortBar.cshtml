@@ -1,8 +1,8 @@
 ﻿@model string
 
 <form id="sortForm" action="@Model">
-    <label>Sortowanie</label>
-    <select id="sortOrder" name="SortOrder" class="form-control">
+    <label class="form-label">Sortowanie</label>
+    <select id="sortOrder" name="SortOrder" class="form-control form-control-sm">
         @foreach (var item in @ViewBag.Values){
             if (ViewData["Selected"].ToString()!=null && ViewData["Selected"].ToString() == item.Key){
                 <option value="@item.Key" selected>@item.Value</option>

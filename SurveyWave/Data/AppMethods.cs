@@ -1,4 +1,4 @@
-﻿using ASP.NETcoreSurveyApp.Models;
+﻿using SurveyWave.Models;
 using Azure.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

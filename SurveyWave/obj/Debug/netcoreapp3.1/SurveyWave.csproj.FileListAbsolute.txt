@@ -684,7 +684,6 @@ C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\n
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Survey\Details.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Survey\Edit.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Survey\Index.cshtml.g.cs
-C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Survey\ShowResults.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\SurveyWave.RazorTargetAssemblyInfo.cache
@@ -697,3 +696,9 @@ C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\n
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_SearchBar.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_SortBar.cshtml.g.cs
 C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_StatusBar.cshtml.g.cs
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Survey\MySurveys.cshtml.g.cs
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Response\Details.cshtml.g.cs
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\bin\Debug\netcoreapp3.1\JetBrains.Annotations.dll
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\bin\Debug\netcoreapp3.1\X.PagedList.dll
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
+C:\Users\alicj\source\repos\ASP.NET Core MVC - SurveyWave\SurveyWave\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Templates\_Pagination.cshtml.g.cs

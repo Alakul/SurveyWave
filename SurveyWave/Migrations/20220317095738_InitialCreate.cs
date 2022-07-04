@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ASP.NETcoreSurveyApp.Migrations
+namespace SurveyWave.Migrations
 {
     public partial class InitialCreate : Migration
     {

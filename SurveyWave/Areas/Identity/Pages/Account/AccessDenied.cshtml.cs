@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ASP.NETcoreSurveyApp.Areas.Identity.Pages.Account
+namespace SurveyWave.Areas.Identity.Pages.Account
 {
     public class AccessDeniedModel : PageModel
     {

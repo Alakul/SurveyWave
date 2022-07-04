@@ -17,6 +17,7 @@
                     @for (int j = 0; j < Model.Questions[i].Answers.Count(); j++)
                     {
                         <p>@j. @Model.Questions[i].Answers[j].Text</p>
+                        <p>Liczba odpowiedzi na pytanie: @Model.Responses.Where(x=>x.Response.AnswerId==@Model.Questions[i].Answers[j].Id).ToList().Count()</p>
                     }
                 </div>
             </li>
@@ -25,10 +26,11 @@
 </div>
 
 
+<p>Liczba odpowiedzi: @Model.ResponsesInfo.Count</p>
 
 @foreach (var Response in Model.Responses)
 {
 	<div>
-		<p>User Id: @Response.Response.UserId</p>
+		<p>User Id: @Response.Response.Id</p>
 	</div>
 }

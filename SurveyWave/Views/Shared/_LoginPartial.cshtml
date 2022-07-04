@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using ASP.NETcoreSurveyApp.Areas.Identity.Data
+@using SurveyWave.Areas.Identity.Data
 
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
@@ -10,10 +10,21 @@
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
     </li>
-    <li class="nav-item">
-        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Wyloguj się</button>
-        </form>
+
+    <li class="nav-item dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </button>
+        
+        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" asp-controller="Survey" asp-action="MySurveys">Moje ankiety</a></li>
+            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Ustawienia</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="dropdown-item">Wyloguj</button>
+                </form>
+            </li>
+        </ul>
     </li>
 }
 else

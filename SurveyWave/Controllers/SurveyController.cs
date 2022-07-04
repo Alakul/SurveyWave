@@ -1,15 +1,15 @@
-﻿using ASP.NETcoreSurveyApp.Data;
-using ASP.NETcoreSurveyApp.Models;
+﻿using SurveyWave.Data;
+using SurveyWave.Models;
 using Biblioteczka.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SurveyWave.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using X.PagedList;
 
-namespace ASP.NETcoreSurveyApp.Controllers
+namespace SurveyWave.Controllers
 {
     public class SurveyController : Controller
     {
@@ -20,7 +20,7 @@ namespace ASP.NETcoreSurveyApp.Controllers
         }
 
         // GET: SurveController
-        public ActionResult Index(string searchString, string sortOrder, string formValue, string selectStatus)
+        public ActionResult Index(int? page, string searchString, string sortOrder, string formValue, string selectStatus)
         {
             List<Survey> surveys = db.Survey.ToList();
             HttpContextAccessor httpContextAccessor = new HttpContextAccessor();
@@ -36,7 +36,11 @@ namespace ASP.NETcoreSurveyApp.Controllers
             ViewData["SelectedStatus"] = AppMethods.SetViewData(httpContextAccessor, selectStatus, "StatusSurvey", "A");
             ViewBag.Status = AppData.status;
 
-            return View(surveys);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            IPagedList<Survey> pageSurvey = surveys.ToPagedList(pageNumber, pageSize);
+
+            return View(pageSurvey);
         }
 
         // GET: SurveController/Details/5
@@ -46,6 +50,13 @@ namespace ASP.NETcoreSurveyApp.Controllers
             surveyViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
             surveyViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
             surveyViewModel.Answers = db.Answer.ToList();
+
+            string user = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            List<ResponseInfo> responseInfo = db.ResponseInfo.Where(x=>x.SurveyId==id && x.UserId == user).ToList();
+            if (responseInfo.Count != 0){
+                ViewBag.Filled = true;
+            }
 
             return View(surveyViewModel);
         }
@@ -173,47 +184,17 @@ namespace ASP.NETcoreSurveyApp.Controllers
                 return View();
             }
         }
-
-
-
-        public ActionResult ShowResults(int id)
+        public IActionResult MySurveys(int? page)
         {
-            ResponseViewModel responseViewModel = new ResponseViewModel();
+            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            List<Survey> surveys = db.Survey.Where(x => x.UserId == id).ToList();
 
-            List<ResponseViewModel> responses = db.Survey
-                .Join(db.Question, a => a.Id, b => b.SurveyId, (a, b) => new { survey = a, question = b })
-                .Join(db.Answer, joined => joined.question.Id, b => b.QuestionId, (joined, b) => new { joined, answer = b })
-                .Join(db.Response, joinedTwice => joinedTwice.answer.Id, response => response.AnswerId,
-                (joinedTwice, response) => new ResponseViewModel
-                {
-                    Survey = joinedTwice.joined.survey,
-                    Response = response,
-                })
-                .Where(x=>x.Survey.Id == id).ToList();
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            IPagedList<Survey> pageSurvey = surveys.ToPagedList(pageNumber, pageSize);
 
-            responseViewModel.Responses = responses;
-            responseViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
-            responseViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
-            responseViewModel.Answers = db.Answer.ToList();
-            return View(responseViewModel);
+            return View(pageSurvey);
         }
 
-        public IActionResult SelectStatus(string selectStatus)
-        {
-            List<Survey> surveys = db.Survey.ToList();
-            if (selectStatus == "C" || selectStatus == "O"){
-                surveys = db.Survey.Where(x => x.Status == selectStatus).ToList();
-            }
-            ViewData["SelectedStatus"] = selectStatus;
-
-            Dictionary<string, string> status = new Dictionary<string, string> {
-                {"A", "Wszystkie"},
-                {"O", "Otwarte"},
-                {"C", "Zamknięte"}
-            };
-            ViewBag.Status = status;
-
-            return View(nameof(Index), surveys);
-        }
     }
 }

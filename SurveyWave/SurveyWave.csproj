@@ -25,6 +25,16 @@
     <Compile Remove="Migrations\20220622111441_Edit.Designer.cs" />
     <Compile Remove="Migrations\20220622111643_Edit.cs" />
     <Compile Remove="Migrations\20220622111643_Edit.Designer.cs" />
+    <Compile Remove="Migrations\20220704095222_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704095222_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220704095355_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704095355_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220704095452_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704095452_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220704095647_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704095647_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220704100205_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704100205_ResponseInfoCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +55,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
   <ItemGroup>

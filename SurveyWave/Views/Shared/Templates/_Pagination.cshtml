@@ -1,0 +1,22 @@
+﻿@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web.Common;
+@using System.Web;
+
+@{
+    string controllerName = @Model.Item2;
+    string actionName = @Model.Item3;
+}
+
+<div class="page-count text-center mt-3">
+    Strona @(Model.Item1.PageCount < Model.Item1.PageNumber ? 0 : Model.Item1.PageNumber) z @Model.Item1.PageCount
+</div>
+<div class="me-auto mt-2 d-flex justify-content-center">
+    @Html.PagedListPager((IPagedList)@Model.Item1, page => 
+    Url.Action(@actionName, @controllerName, new { page, id = ViewData["Id"] }), 
+    new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+    })
+</div>

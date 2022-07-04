@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASP.NETcoreSurveyApp.Areas.Identity.Data;
-using ASP.NETcoreSurveyApp.Models;
+using SurveyWave.Areas.Identity.Data;
+using SurveyWave.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ASP.NETcoreSurveyApp.Data
+namespace SurveyWave.Data
 {
     public class AppDbContext : IdentityDbContext<AppUser>
     {
@@ -16,6 +16,7 @@ namespace ASP.NETcoreSurveyApp.Data
         public DbSet<Question> Question { get; set; }
         public DbSet<Answer> Answer { get; set; }
         public DbSet<Response> Response { get; set; }
+        public DbSet<ResponseInfo> ResponseInfo { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

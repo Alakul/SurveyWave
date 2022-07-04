@@ -1,4 +1,4 @@
-using ASP.NETcoreSurveyApp.Models;
+using SurveyWave.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace ASP.NETcoreSurveyApp
+namespace SurveyWave
 {
     public class Startup
     {

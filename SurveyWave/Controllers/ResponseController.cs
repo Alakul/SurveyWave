@@ -1,5 +1,5 @@
-﻿using ASP.NETcoreSurveyApp.Data;
-using ASP.NETcoreSurveyApp.Models;
+﻿using SurveyWave.Data;
+using SurveyWave.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace ASP.NETcoreSurveyApp.Controllers
+namespace SurveyWave.Controllers
 {
     public class ResponseController : Controller
     {
@@ -26,7 +26,27 @@ namespace ASP.NETcoreSurveyApp.Controllers
         // GET: ResponsController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            ResponseViewModel responseViewModel = new ResponseViewModel();
+
+            List<ResponseViewModel> responses = db.Survey
+                .Join(db.Question, a => a.Id, b => b.SurveyId, (a, b) => new { survey = a, question = b })
+                .Join(db.Answer, joined => joined.question.Id, b => b.QuestionId, (joined, b) => new { joined, answer = b })
+                .Join(db.Response, joinedTwice => joinedTwice.answer.Id, response => response.AnswerId, (joinedTwice, response) => new { joinedTwice, response })
+                .Join(db.ResponseInfo, joinedThrice => joinedThrice.response.ResponseInfoId, responseInfo => responseInfo.Id,
+                (joinedThrice, responseInfo) => new ResponseViewModel
+                {
+                    Survey = joinedThrice.joinedTwice.joined.survey,
+                    ResponseInfo = responseInfo,
+                    Response = joinedThrice.response,
+                })
+                .Where(x => x.Survey.Id == id).ToList();
+
+            responseViewModel.Responses = responses;
+            responseViewModel.ResponsesInfo = db.ResponseInfo.Where(x => x.SurveyId == id).ToList();
+            responseViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
+            responseViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
+            responseViewModel.Answers = db.Answer.ToList();
+            return View(responseViewModel);
         }
 
         // GET: ResponsController/Create
@@ -38,29 +58,36 @@ namespace ASP.NETcoreSurveyApp.Controllers
         // POST: ResponsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection, SurveyViewModel model)
+        public ActionResult Create(IFormCollection collection, SurveyViewModel model, int id)
         {
             try
             {
                 string selected = Request.Form["selected"].ToString();
                 string[] selectedList = selected.Split(',');
 
+                ResponseInfo responseInfo = new ResponseInfo
+                {
+                    SurveyId = id,
+                    UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    Date = DateTime.Now
+                };
+                db.ResponseInfo.Add(responseInfo);
+                db.SaveChanges();
+
                 for (int i=0; i<selectedList.Length; i++)
                 {
                     int selectedId = int.Parse(selectedList[i]);
-                    //IEnumerable<int> selectedAnswers = model.QuestionList[i].Answers.Where(x => x.IsSelected == true).Select(x => x.Id);
-                    
+
                     Response response = new Response
                     {
+                        ResponseInfoId = responseInfo.Id,
                         AnswerId = selectedId,
-                        UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                        Date = DateTime.Now,
                     };
                     db.Response.Add(response);
                     db.SaveChanges();
                     
                 }
-                return RedirectToAction("Create", "Survey");
+                return RedirectToAction("Index", "Survey");
             }
             catch
             {

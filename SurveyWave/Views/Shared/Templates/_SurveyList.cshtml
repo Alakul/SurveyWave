@@ -1,0 +1,27 @@
+﻿@using System.Security.Claims;
+
+@foreach (var survey in Model)
+{
+    <div class="list-group-item d-flex w-100 align-items-center justify-content-between">
+        <div>
+            <a class="text-decoration-none text-dark" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Details"><strong class="mb-1">@survey.Title</strong></a><br>
+            @if (survey.Status == "O"){
+                <small class="small">Status: Otwarta</small>
+            }
+            else if (survey.Status == "C"){
+                <small class="small">Status: Zamknięta</small>
+            }
+            <small class="small">Data zamknięcia: @survey.EndDate</small>
+        </div>
+        <div>
+            @if (survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+                <a class="text-decoration-none text-white btn btn-primary btn-sm" asp-route-id="@survey.Id" asp-controller="Response" asp-action="Details"><i class="bi bi-clipboard-data"></i> Wyniki</a>
+                <a class="text-decoration-none text-white btn btn-success btn-sm" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Edit"><i class="bi bi-pencil-square"></i></a>
+                <a class="text-decoration-none text-white btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal_@survey.Id"><i class="bi bi-trash3-fill"></i></a>
+                <form asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Delete" method="post">
+                    <partial name="Templates/_ModalDelete" model="@survey.Id"/>
+                </form>
+            }
+        </div>
+    </div>     
+}

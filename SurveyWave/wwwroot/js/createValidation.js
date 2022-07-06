@@ -50,7 +50,6 @@
         );
 
         var answers = $("#question_" + i).find('.answerRow').length;
-        console.log(answers);
         for (var j = 0; j < answers; j++) {
             $('[name="Questions[' + i + '].Answers[' + j + '].Text').rules(
                     'add', {

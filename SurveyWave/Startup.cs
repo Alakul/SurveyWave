@@ -56,7 +56,7 @@ namespace SurveyWave
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Survey}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

@@ -62,8 +62,14 @@ namespace SurveyWave.Controllers
         {
             try
             {
-                string selected = Request.Form["selected"].ToString();
-                string[] selectedList = selected.Split(',');
+                int questions = int.Parse(Request.Form["questions"]);
+                for (int i=0; i < questions; i++){
+                    string selectedValues = Request.Form["group_" + i].ToString();
+                    if (selectedValues == ""){
+                        TempData["Alert"] = "Danger";
+                        return RedirectToAction(nameof(Details), "Survey", new { id });
+                    }
+                }
 
                 ResponseInfo responseInfo = new ResponseInfo
                 {
@@ -74,24 +80,32 @@ namespace SurveyWave.Controllers
                 db.ResponseInfo.Add(responseInfo);
                 db.SaveChanges();
 
-                for (int i=0; i<selectedList.Length; i++)
+                for (int i = 0; i < questions; i++)
                 {
-                    int selectedId = int.Parse(selectedList[i]);
-
-                    Response response = new Response
-                    {
-                        ResponseInfoId = responseInfo.Id,
-                        AnswerId = selectedId,
-                    };
-                    db.Response.Add(response);
-                    db.SaveChanges();
+                    string selectedValues = Request.Form["group_" + i].ToString();
+                    string[] selectedList = selectedValues.Split(',');
                     
+                    for (int j = 0; j < selectedList.Length; j++)
+                    {
+                        int selectedId = int.Parse(selectedList[j]);
+
+                        Response response = new Response
+                        {
+                            ResponseInfoId = responseInfo.Id,
+                            AnswerId = selectedId,
+                        };
+                        db.Response.Add(response);
+                        db.SaveChanges();
+                    }
                 }
-                return RedirectToAction("Index", "Survey");
+
+                TempData["Alert"] = "Success";
+                return RedirectToAction(nameof(Details), "Survey", new { id });
             }
             catch
             {
-                return View();
+                TempData["Alert"] = "Danger";
+                return RedirectToAction(nameof(Details), "Survey", new { id });
             }
         }
 
@@ -135,6 +149,16 @@ namespace SurveyWave.Controllers
             {
                 return View();
             }
+        }
+
+        public SurveyViewModel GetModel(int id)
+        {
+            SurveyViewModel surveyViewModel = new SurveyViewModel();
+            surveyViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
+            surveyViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
+            surveyViewModel.Answers = db.Answer.ToList();
+
+            return surveyViewModel;
         }
     }
 }

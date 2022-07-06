@@ -70,6 +70,10 @@ body {
     background-color: #4F759B;
     border-color: #4F759B;
 }
+.btn-primary:hover {
+    background-color: #37597a;
+    border-color: #37597a;
+}
 
 .btn-action {
     padding: 4px;

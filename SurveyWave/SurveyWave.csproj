@@ -38,11 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\validation.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\validation.js" />
+    <Content Remove="wwwroot\js\createValidation.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -63,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\validation.js" />
+    <None Include="wwwroot\js\createValidation.js" />
   </ItemGroup>
 
 </Project>

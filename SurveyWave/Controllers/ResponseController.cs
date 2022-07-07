@@ -24,6 +24,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: ResponsController/Details/5
+        [Route("WynikiAnkiety/{id}")]
         public ActionResult Details(int id)
         {
             ResponseViewModel responseViewModel = new ResponseViewModel();
@@ -51,6 +52,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: ResponsController/Create
+        [Route("ZapiszPodejscie")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +61,7 @@ namespace SurveyWave.Controllers
         // POST: ResponsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("ZapiszPodejscie")]
         public ActionResult Create(IFormCollection collection, SurveyViewModel model, int id)
         {
             try
@@ -151,7 +154,6 @@ namespace SurveyWave.Controllers
                 return View();
             }
         }
-
         public SurveyViewModel GetModel(int id)
         {
             SurveyViewModel surveyViewModel = new SurveyViewModel();

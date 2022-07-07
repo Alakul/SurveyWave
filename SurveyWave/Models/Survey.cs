@@ -36,15 +36,7 @@ namespace SurveyWave.Models
         [Display(Name = "Status")]
         public string Status { get; set; }
         public DateTime Date { get; set; }
-
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Data otwarcia")]
-        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
-
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Data zamknięcia")]
-        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
 
         public List<Question> Questions { get; set; }

@@ -76,7 +76,6 @@ body {
     background-color: #37597a;
     border-color: #37597a;
 }
-
 .btn-action {
     padding: 4px;
 }
@@ -85,17 +84,14 @@ body {
     background-color: #4F759B;
     border-color: #4F759B;
 }
-
 .page-item.disabled .page-link {
     color: #DB4249;
     background-color: #fff;
     border-color: #4F759B;
 }
-
 .page-item > .page-link {
     color: black;
 }
-
 .page-item > .page-link:hover {
     color: black;
 }
@@ -107,7 +103,6 @@ body {
 .nav-link {
     color: #37597a;
 }
-
 .nav-link:hover, .nav-link:focus {
     color: #37597a;
 }
@@ -116,7 +111,6 @@ body {
     color: #fff;
     background-color: #4F759B;
 }
-
 .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     background-color: #37597a;

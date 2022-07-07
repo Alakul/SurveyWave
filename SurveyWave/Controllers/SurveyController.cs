@@ -11,6 +11,7 @@ using X.PagedList;
 
 namespace SurveyWave.Controllers
 {
+    [Route("Ankiety")]
     public class SurveyController : Controller
     {
         AppDbContext db;
@@ -20,6 +21,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: SurveController
+        [Route("/")]
         public ActionResult Index(int? page, string searchString, string sortOrder, string formValue, string selectStatus)
         {
             List<Survey> surveys = db.Survey.ToList();
@@ -44,6 +46,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: SurveController/Details/5
+        [Route("Ankieta/{id}")]
         public ActionResult Details(int id)
         {  
             SurveyViewModel surveyViewModel = new SurveyViewModel();
@@ -63,6 +66,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: SurveController/Create
+        [Route("Dodaj")]
         public ActionResult Create()
         {
             SurveyViewModel surveyViewModel = new SurveyViewModel();
@@ -74,6 +78,7 @@ namespace SurveyWave.Controllers
         // POST: SurveController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Dodaj")]
         public ActionResult Create(IFormCollection collection, SurveyViewModel model)
         {
             if (ModelState.IsValid)
@@ -127,16 +132,21 @@ namespace SurveyWave.Controllers
                 return View(nameof(Create), surveyViewModel );
             }
         }
+
+        [Route("DodajPytanie")]
         public IActionResult AddQuestion(int index)
         {
             return PartialView("Templates/_Question", new Question() { Index = index });
         }
+
+        [Route("DodajOdpowiedz")]
         public IActionResult AddAnswer(int questionIndex, int index, string type)
         {
             return PartialView("Templates/_Answer", new Answer() { QuestionIndex = questionIndex, Index = index, QuestionType = type });
         }
 
         // GET: SurveController/Edit/5
+        [Route("Edytuj/{id}")]
         public ActionResult Edit(int id)
         {
             SurveyViewModel surveyViewModel = new SurveyViewModel();
@@ -149,6 +159,7 @@ namespace SurveyWave.Controllers
         // POST: SurveController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Edytuj/{id}")]
         public ActionResult Edit(int id, IFormCollection collection, SurveyViewModel model)
         {
             if (ModelState.IsValid)
@@ -173,6 +184,7 @@ namespace SurveyWave.Controllers
         }
 
         // GET: SurveController/Delete/5
+        [Route("Usuń/{id}")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -181,6 +193,7 @@ namespace SurveyWave.Controllers
         // POST: SurveController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Usuń/{id}")]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try
@@ -194,6 +207,8 @@ namespace SurveyWave.Controllers
                 return View();
             }
         }
+
+        [Route("MojeAnkiety")]
         public IActionResult MySurveys(int? page)
         {
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);

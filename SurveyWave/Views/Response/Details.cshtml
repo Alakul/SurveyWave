@@ -21,24 +21,41 @@
             </p>
         </div>
     </div>
-    <hr class="mb-0"/>
-    <div class="mb-3 mt-3">
-        <p class="m-0">Liczba odpowiedzi: <strong>@Model.ResponsesInfo.Count</strong></p>
+    <div>
+        <hr class="mb-0"/>
+        <p class="mb-3 mt-3">Liczba odpowiedzi: <strong>@Model.ResponsesInfo.Count</strong></p>
+        <hr/>
     </div>
 
-    <ul class="list-group list-group-flush">
-        @for (int i = 0; i < Model.Questions.Count(); i++)
-        {
-            <li class="list-group-item">
-                <h4>@(i+1). @Model.Questions[i].Text</h4>
-                <div class="form-check">
-                    @for (int j = 0; j < Model.Questions[i].Answers.Count(); j++)
-                    {
-                        <p>@j. @Model.Questions[i].Answers[j].Text</p>
-                        <p>Liczba odpowiedzi na pytanie: @Model.Responses.Where(x=>x.Response.AnswerId==@Model.Questions[i].Answers[j].Id).ToList().Count()</p>
-                    }
-                </div>
-            </li>
-        }
-    </ul>
+    @if (@Model.ResponsesInfo.Count != 0)
+    {
+        <h4 class="mb-3 mt-4">Wyniki</h4>
+        <div>
+            @for (int i = 0; i < Model.Questions.Count(); i++)
+            {
+                <table class="table table-bordered table-striped table-sm mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col" colspan="3"><h5 class="m-0"><strong>@(i+1). @Model.Questions[i].Text</strong></h5></th>
+                        </tr>
+                        <tr>
+                            <th>Nr</th>
+                            <th>Treść</th>
+                            <th>Liczba odpowiedzi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int j = 0; j < Model.Questions[i].Answers.Count(); j++)
+                        {
+                            <tr>
+                                <td>@(j+1)</td>
+                                <td>@Model.Questions[i].Answers[j].Text</td>
+                                <td>@Model.Responses.Where(x=>x.Response.AnswerId==@Model.Questions[i].Answers[j].Id).ToList().Count()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    }
 </div>

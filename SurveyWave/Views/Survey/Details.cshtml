@@ -20,11 +20,11 @@
                 <div class="mb-2">
                     <a class="text-decoration-none btn btn-primary" asp-route-id="@Model.Survey.Id" asp-controller="Response" asp-action="Details"><i class="bi bi-clipboard-data mr-1"></i> Wyniki</a>
                     <a class="text-decoration-none btn btn-success" asp-route-id="@Model.Survey.Id" asp-controller="Survey" asp-action="Edit"><i class="bi bi-pencil-square mr-1"></i> Edytuj</a>
-                </div> 
+                </div>
+                <div class="text-right">
+                    <p>Autor: <strong>@Model.User</strong></p>
+                </div>
             }
-            <div class="text-right">
-                <p>Autor: <strong>@Model.User</strong></p>
-            </div>
         </div>
     </div>
     <hr class="mb-0"/>

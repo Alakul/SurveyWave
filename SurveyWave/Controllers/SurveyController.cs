@@ -71,7 +71,7 @@ namespace SurveyWave.Controllers
         {
             SurveyViewModel surveyViewModel = new SurveyViewModel();
             surveyViewModel.Questions = new List<Question>() { new Question() };
-            surveyViewModel.Answers = new List<Answer>() { new Answer() };
+            surveyViewModel.Answers = new List<Answer>() { new Answer(), new Answer() };
             return View(surveyViewModel);
         }
 
@@ -128,7 +128,7 @@ namespace SurveyWave.Controllers
                 TempData["Alert"] = "Danger";
                 SurveyViewModel surveyViewModel = new SurveyViewModel();
                 surveyViewModel.Questions = new List<Question>() { new Question() };
-                surveyViewModel.Answers = new List<Answer>() { new Answer() };
+                surveyViewModel.Answers = new List<Answer>() { new Answer(), new Answer() };
                 return View(nameof(Create), surveyViewModel );
             }
         }

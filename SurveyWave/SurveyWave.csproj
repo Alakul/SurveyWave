@@ -5,8 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220317211808_SurveyDetailsCreate.cs" />
+    <Compile Remove="Migrations\20220317211808_SurveyDetailsCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220317211842_AnswerCreate.cs" />
+    <Compile Remove="Migrations\20220317211842_AnswerCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220317211915_AnswerDetailsCreate.cs" />
+    <Compile Remove="Migrations\20220317211915_AnswerDetailsCreate.Designer.cs" />
     <Compile Remove="Migrations\20220318123454_SurveyQuestionCreate.cs" />
     <Compile Remove="Migrations\20220318123454_SurveyQuestionCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220318123529_SurveyQuestionCreate.cs" />
+    <Compile Remove="Migrations\20220318123529_SurveyQuestionCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220318124156_SurveyAnswerCreate.cs" />
+    <Compile Remove="Migrations\20220318124156_SurveyAnswerCreate.Designer.cs" />
     <Compile Remove="Migrations\20220505131111_ChangeTables.cs" />
     <Compile Remove="Migrations\20220505131111_ChangeTables.Designer.cs" />
     <Compile Remove="Migrations\20220505132339_ChangeTable.cs" />
@@ -25,6 +35,12 @@
     <Compile Remove="Migrations\20220622111441_Edit.Designer.cs" />
     <Compile Remove="Migrations\20220622111643_Edit.cs" />
     <Compile Remove="Migrations\20220622111643_Edit.Designer.cs" />
+    <Compile Remove="Migrations\20220622111855_Edit.cs" />
+    <Compile Remove="Migrations\20220622111855_Edit.Designer.cs" />
+    <Compile Remove="Migrations\20220622124128_DeleteResponseId.cs" />
+    <Compile Remove="Migrations\20220622124128_DeleteResponseId.Designer.cs" />
+    <Compile Remove="Migrations\20220701112045_SurveyEdit.cs" />
+    <Compile Remove="Migrations\20220701112045_SurveyEdit.Designer.cs" />
     <Compile Remove="Migrations\20220704095222_ResponseInfoCreate.cs" />
     <Compile Remove="Migrations\20220704095222_ResponseInfoCreate.Designer.cs" />
     <Compile Remove="Migrations\20220704095355_ResponseInfoCreate.cs" />
@@ -35,6 +51,12 @@
     <Compile Remove="Migrations\20220704095647_ResponseInfoCreate.Designer.cs" />
     <Compile Remove="Migrations\20220704100205_ResponseInfoCreate.cs" />
     <Compile Remove="Migrations\20220704100205_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220704100402_ResponseInfoCreate.cs" />
+    <Compile Remove="Migrations\20220704100402_ResponseInfoCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220707122048_ResponseCreate.cs" />
+    <Compile Remove="Migrations\20220707122048_ResponseCreate.Designer.cs" />
+    <Compile Remove="Migrations\20220707122245_ResponseCreate.cs" />
+    <Compile Remove="Migrations\20220707122245_ResponseCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

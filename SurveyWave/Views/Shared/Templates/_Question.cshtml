@@ -18,7 +18,8 @@
     <div class="questionContent">
         <input name="Questions[@(Model.Index)].Type" class="inputGroupValue" value="Radio" hidden>
         <div class="answerRows">
-            <partial name="Templates/_Answer" model="@new Answer() { QuestionIndex = @Model.Index }" />
+            <partial name="Templates/_Answer" model="@new Answer() { QuestionIndex = @Model.Index, Index = 0 }" />
+            <partial name="Templates/_Answer" model="@new Answer() { QuestionIndex = @Model.Index, Index = 1 }" />
         </div>
 
         <div class="d-flex justify-content-between mt-2">

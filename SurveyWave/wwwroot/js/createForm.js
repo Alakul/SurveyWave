@@ -1,5 +1,5 @@
 ﻿changeFirstElementQuestion();
-changeFirstElementAnswer();
+changeFirstElementsAnswer();
 
 $(document).on('click', '#addQuestion', function () {
     var i = $(".questionRow").length;
@@ -10,7 +10,7 @@ $(document).on('click', '#addQuestion', function () {
         success: function (html) {
             $("#questionRows").append(html);
             changeFirstElementQuestion();
-            changeFirstElementAnswer();
+            changeFirstElementsAnswer();
             changeIdQuestion();
 
             var last = $(".questionRow").length - 1;
@@ -52,7 +52,7 @@ $(document).on('click', '.addAnswer', function () {
         cache: false,
         success: function (html) {
             element.append(html);
-            changeFirstElementAnswer();
+            changeFirstElementsAnswer();
 
             var last = $("#question_"+qi).find('.answerRows').children('.answerRow').length - 1;
             $('[name="Questions[' + qi + '].Answers[' + last + '].Text').rules(
@@ -74,7 +74,7 @@ $(document).on('click', 'a.deleteAnswer', function () {
     $(this).parents("div.answerRow:first").remove();
     var answers = $("#question_" + index).find(".answerRow");
 
-    changeFirstElementAnswer();
+    changeFirstElementsAnswer();
     changeIdAnswer(answers, index);
 
     return false;
@@ -123,16 +123,19 @@ function changeFirstElementQuestion() {
     }
 }
 
-function changeFirstElementAnswer() {
+function changeFirstElementsAnswer() {
     var elements = $(".questionRow");
 
     elements.each(function (i, obj) {
         var answers = $(this).find('.answerRow').length;
-        if (answers == 1) {
-            $(this).find('.answerRow:first').find('.answerButtons').hide();
+        var min = 2;
+        if (answers == min) {
+            $(this).find('.answerRow:first').find('.answerButtons').find('.deleteAnswer').hide();
+            $(this).find('.answerRow:first').next().find('.answerButtons').find('.deleteAnswer').hide();
         }
-        else if (answers > 1) {
-            $(this).find('.answerRow:first').find('.answerButtons').show();
+        else if (answers > min) {
+            $(this).find('.answerRow:first').find('.answerButtons').find('.deleteAnswer').show();
+            $(this).find('.answerRow:first').next().find('.answerButtons').find('.deleteAnswer').show();
         }
     });
 }

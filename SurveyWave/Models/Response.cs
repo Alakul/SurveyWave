@@ -16,6 +16,6 @@ namespace SurveyWave.Models
 
         [ForeignKey("AnswerId")]
         public int AnswerId { get; set; }
-        public List<Answer> Answers { get; set; }
+        
     }
 }

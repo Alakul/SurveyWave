@@ -20,7 +20,7 @@
             <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Ustawienia</a></li>
             <li><hr class="dropdown-divider"></li>
             <li>
-                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Survey", new { area = "" })">
                     <button type="submit" class="dropdown-item">Wyloguj</button>
                 </form>
             </li>

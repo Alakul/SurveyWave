@@ -36,7 +36,7 @@ namespace SurveyWave.Controllers
             ViewData["SelectedStatus"] = AppMethods.SetViewData(httpContextAccessor, selectStatus, "StatusSurvey", "A");
             ViewBag.Status = AppData.status;
 
-            int pageSize = 10;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
             IPagedList<Survey> pageSurvey = surveys.ToPagedList(pageNumber, pageSize);
 
@@ -50,6 +50,7 @@ namespace SurveyWave.Controllers
             surveyViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
             surveyViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
             surveyViewModel.Answers = db.Answer.ToList();
+            surveyViewModel.User = db.Users.Where(x => x.Id == surveyViewModel.Survey.UserId).Single();
 
             string user = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -83,8 +84,6 @@ namespace SurveyWave.Controllers
                     Title = model.Survey.Title,
                     Description = model.Survey.Description,
                     Date = DateTime.Now,
-                    StartDate = model.Survey.StartDate,
-                    EndDate = model.Survey.EndDate,
                     Status = model.Survey.Status,
                 };
 
@@ -150,15 +149,26 @@ namespace SurveyWave.Controllers
         // POST: SurveController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection collection, SurveyViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                Survey survey = db.Survey.Where(x => x.Id == id).Single();
+                survey.Title = model.Survey.Title;
+                survey.Description = model.Survey.Description;
+                survey.Status = model.Survey.Status;
+                survey.Date = model.Survey.Date;
+
+                db.Survey.Update(survey);
+                db.SaveChanges();
+
+                TempData["Alert"] = "Success";
+                return RedirectToAction(nameof(Edit));
             }
-            catch
+            else
             {
-                return View();
+                TempData["Alert"] = "Danger";
+                return View(nameof(Edit), new {id});
             }
         }
 
@@ -189,7 +199,7 @@ namespace SurveyWave.Controllers
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             List<Survey> surveys = db.Survey.Where(x => x.UserId == id).ToList();
 
-            int pageSize = 3;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
             IPagedList<Survey> pageSurvey = surveys.ToPagedList(pageNumber, pageSize);
 

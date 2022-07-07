@@ -2,8 +2,42 @@
 @{
     ViewData["Title"] = "Edytuj ankietę";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to edit survey.</p>
+<div>
+    <partial name="Templates/_Alert" model="@TempData["Alert"]?.ToString()"/>
+    <form asp-controller="Survey" asp-action="Edit" method="post">
+        <div class="mb-3">
+            <h3>@ViewData["Title"]</h3>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Survey.Title">Tytuł <span style="color: red;">*</span></label>
+            <input asp-for="Survey.Title" type="text" class="form-control" value="@Model.Survey.Title">
+            <span asp-validation-for="Survey.Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Survey.Description">Opis <span style="color: red;">*</span></label>
+            <textarea asp-for="Survey.Description" type="text" class="form-control">@Model.Survey.Description</textarea>
+            <span asp-validation-for="Survey.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-4">
+            <label asp-for="Survey.Status">Status <span style="color: red;">*</span></label>
+            <select asp-for="Survey.Status" class="form-control">
+                @if (@Model.Survey.Status == "O"){
+                    <option selected value="O">Otwarta</option>
+                    <option value="C">Zamknięta</option>
+                }
+                else if (@Model.Survey.Status == "C"){
+                    <option value="O">Otwarta</option>
+                    <option selected value="C">Zamknięta</option>
+                }  
+            </select>
+            <span asp-validation-for="Survey.Status" class="text-danger"></span>
+        </div>
 
-<p>@Model.Survey.Title</p>
+        <button id="submit" class="btn btn-primary" type="submit">Zapisz</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

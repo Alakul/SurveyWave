@@ -1,27 +1,39 @@
 ﻿@using System.Security.Claims;
 
-@foreach (var survey in Model)
-{
-    <div class="list-group-item d-flex w-100 align-items-center justify-content-between">
-        <div>
-            <a class="text-decoration-none text-dark" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Details"><strong class="mb-1">@survey.Title</strong></a><br>
-            @if (survey.Status == "O"){
-                <small class="small">Status: Otwarta</small>
-            }
-            else if (survey.Status == "C"){
-                <small class="small">Status: Zamknięta</small>
-            }
-            <small class="small">Data zamknięcia: @survey.EndDate</small>
-        </div>
-        <div>
-            @if (survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
-                <a class="text-decoration-none text-white btn btn-primary btn-sm" asp-route-id="@survey.Id" asp-controller="Response" asp-action="Details"><i class="bi bi-clipboard-data"></i> Wyniki</a>
-                <a class="text-decoration-none text-white btn btn-success btn-sm" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Edit"><i class="bi bi-pencil-square"></i></a>
-                <a class="text-decoration-none text-white btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal_@survey.Id"><i class="bi bi-trash3-fill"></i></a>
-                <form asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Delete" method="post">
-                    <partial name="Templates/_ModalDelete" model="@survey.Id"/>
-                </form>
-            }
-        </div>
-    </div>     
-}
+<table class="table table-striped" style="border: 1px solid #dee2e6;">
+    <thead>
+        <tr>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Status</th>
+            <th scope="col">Data dodania</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var survey in Model)
+        {
+            <tr>
+                <td><a class="text-decoration-none text-dark" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Details">@survey.Title</a></td>
+                <td>
+                    @if (survey.Status == "O"){
+                        <p class="m-0"><i class="bi bi-circle-fill mr-2" style="color: limegreen;"></i>Otwarta</p>
+                    }
+                    else if (survey.Status == "C"){
+                        <p class="m-0"><i class="bi bi-circle-fill mr-2" style="color: red;"></i>Zamknięta</p>
+                    }
+                </td>
+                <td>@survey.Date.ToString("yyyy.MM.dd")</td>
+                <td class="float-right">
+                    @if (survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+                        <a class="text-decoration-none text-white btn btn-primary btn-sm" asp-route-id="@survey.Id" asp-controller="Response" asp-action="Details"><i class="bi bi-clipboard-data mr-1"></i> Wyniki</a>
+                        <a class="text-decoration-none text-white btn btn-success btn-sm" asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Edit"><i class="bi bi-pencil-square"></i></a>
+                        <a class="text-decoration-none text-white btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal_@survey.Id" href="#"><i class="bi bi-trash3-fill"></i></a>
+                        <form asp-route-id="@survey.Id" asp-controller="Survey" asp-action="Delete" method="post">
+                            <partial name="Templates/_ModalDelete" model="@survey.Id"/>
+                        </form>
+                    }
+                </td>
+            </tr>  
+        }
+    </tbody>
+</table>

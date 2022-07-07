@@ -11,25 +11,39 @@
 
     <div class="d-flex justify-content-between">
         <div class="mb-3">
-            <h2 name="surveyTitle" type="text">@Model.Survey.Title</h2>
+            <h3 name="surveyTitle" type="text">@Model.Survey.Title</h3>
             <p>@Model.Survey.Description</p>
         </div>
-        @if (Model.Survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
-            <div>
-                <a class="text-decoration-none btn btn-primary" asp-route-id="@Model.Survey.Id" asp-controller="Response" asp-action="Details">Wyświetl wyniki</a>
+        
+        <div> 
+            @if (Model.Survey.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier)){
+                <div class="mb-2">
+                    <a class="text-decoration-none btn btn-primary" asp-route-id="@Model.Survey.Id" asp-controller="Response" asp-action="Details"><i class="bi bi-clipboard-data mr-1"></i> Wyniki</a>
+                    <a class="text-decoration-none btn btn-success" asp-route-id="@Model.Survey.Id" asp-controller="Survey" asp-action="Edit"><i class="bi bi-pencil-square mr-1"></i> Edytuj</a>
+                </div> 
+            }
+            <div class="text-right">
+                <p>Autor: <strong>@Model.User</strong></p>
             </div>
-        }
+        </div>
     </div>
+    <hr class="mb-0"/>
 
     @if (@Model.Survey.Status == "C"){
-        <p>Ankieta zamknięta</p>
+        <div class="mb-3 mt-3">
+            <strong>Ankieta zamknięta</strong>
+        </div>
     }
     else {
         if (ViewBag.Filled == true){
-            <p>Dziękujemy za wypełnienie ankiety!</p>
+            <div class="mb-3 mt-3">
+                <strong>Dziękujemy za wypełnienie ankiety!</strong>
+            </div>
         }
         else if (User.Identity.IsAuthenticated == false){
-            <p>Aby móc wziąć udział w ankiecie - <a asp-area="Identity" asp-page="/Account/Login" class="text-decoration-none">Zaloguj się</a>.</p>
+            <div class="mb-3 mt-3">
+                <strong>Aby móc wziąć udział w ankiecie - <a asp-area="Identity" asp-page="/Account/Login" class="text-decoration-none">Zaloguj się</a>.</strong>
+            </div>
         }
         else {
             <form id="response" asp-route-id="@Model.Survey.Id" asp-controller="Response" asp-action="Create" method="post">

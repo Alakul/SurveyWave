@@ -46,6 +46,7 @@ namespace SurveyWave.Controllers
             responseViewModel.Survey = db.Survey.Where(x => x.Id == id).Single();
             responseViewModel.Questions = db.Question.Where(x => x.SurveyId == id).ToList();
             responseViewModel.Answers = db.Answer.ToList();
+            
             return View(responseViewModel);
         }
 

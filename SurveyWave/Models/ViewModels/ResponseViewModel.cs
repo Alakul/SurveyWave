@@ -1,4 +1,5 @@
-﻿using SurveyWave.Models;
+﻿using SurveyWave.Areas.Identity.Data;
+using SurveyWave.Models;
 using System.Collections.Generic;
 
 namespace SurveyWave.Models

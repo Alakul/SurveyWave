@@ -14,6 +14,7 @@ Project is created with:
 * Entity Framework
 * SQL Server
 * JavaScript
+* jQuery
 * Bootstrap 4
 
 ## Installation

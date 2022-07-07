@@ -1,5 +1,7 @@
 ﻿changeFirstElementQuestion();
 changeFirstElementsAnswer();
+var minAnswers = 2;
+
 
 $(document).on('click', '#addQuestion', function () {
     var i = $(".questionRow").length;
@@ -21,13 +23,16 @@ $(document).on('click', '#addQuestion', function () {
                     maxlength: 200
                 }
             );
-            $('[name="Questions['+ last +'].Answers[0].Text').rules(
-                    'add', {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 200
-                }
-            );
+
+            for (var i = 0; i < minAnswers; i++) {
+                $('[name="Questions[' + last + '].Answers[' + i + '].Text').rules(
+                        'add', {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 200
+                    }
+                );
+            }
         }
     });
     return false;
@@ -128,12 +133,11 @@ function changeFirstElementsAnswer() {
 
     elements.each(function (i, obj) {
         var answers = $(this).find('.answerRow').length;
-        var min = 2;
-        if (answers == min) {
+        if (answers == minAnswers) {
             $(this).find('.answerRow:first').find('.answerButtons').find('.deleteAnswer').hide();
             $(this).find('.answerRow:first').next().find('.answerButtons').find('.deleteAnswer').hide();
         }
-        else if (answers > min) {
+        else if (answers > minAnswers) {
             $(this).find('.answerRow:first').find('.answerButtons').find('.deleteAnswer').show();
             $(this).find('.answerRow:first').next().find('.answerButtons').find('.deleteAnswer').show();
         }

@@ -5,14 +5,14 @@ namespace SurveyWave.Data
     public class AppData
     {
         public static Dictionary<string, string> surveySort = new Dictionary<string, string> {
-            {"DateAsc", "po dacie dodania rosnąco"},
-            {"DateDesc", "po dacie dodania malejąco"},
-            {"TitleAsc", "po tytule rosnąco"},
-            {"TitleDesc", "po tytule malejąco"},
-            {"StartDateAsc", "po dacie otwarcia rosnąco"},
-            {"StartDateDesc", "po dacie otwarcia malejąco"},
-            {"EndDateAsc", "po dacie zamknięcia rosnąco"},
-            {"EndDateDesc", "po dacie zamknięcia malejąco"},
+            {"DateAsc", "Po dacie dodania rosnąco"},
+            {"DateDesc", "Po dacie dodania malejąco"},
+            {"TitleAsc", "Po tytule rosnąco"},
+            {"TitleDesc", "Po tytule malejąco"},
+            {"StartDateAsc", "Po dacie otwarcia rosnąco"},
+            {"StartDateDesc", "Po dacie otwarcia malejąco"},
+            {"EndDateAsc", "Po dacie zamknięcia rosnąco"},
+            {"EndDateDesc", "Po dacie zamknięcia malejąco"},
         };
 
         public static Dictionary<string, string> status = new Dictionary<string, string> {
